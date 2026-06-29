@@ -1,0 +1,258 @@
+{
+  "week": "2026-W27",
+  "generated": "2026-06-29",
+  "items": {
+    "en": [
+      {
+        "title": "EU AI Act Enforcement Begins: First Fines Issued to Non-Compliant Companies",
+        "summary": "The European Union issued its first penalties under the AI Act on June 27, 2026, fining three tech companies a combined EUR 180 million for deploying high-risk AI systems without mandatory transparency disclosures and impact assessments. The enforcement signals a new era of AI accountability in Europe."
+      },
+      {
+        "title": "OpenAI Releases GPT-5 with Built-In Constitutional AI Safety Layer",
+        "summary": "OpenAI unveiled GPT-5 this week, featuring an integrated constitutional AI safety framework that allows users to inspect the model's reasoning chain in real time. The release includes a new alignment dashboard and automated red-teaming capabilities designed to prevent harmful outputs at scale."
+      },
+      {
+        "title": "UN General Assembly Adopts Global AI Ethics Framework with 193-Nation Consensus",
+        "summary": "In a historic vote, the United Nations General Assembly unanimously adopted a binding AI ethics framework covering autonomous weapons, surveillance AI, and algorithmic discrimination. The treaty requires signatory nations to establish national AI oversight agencies within 18 months."
+      },
+      {
+        "title": "DeepMind's AlphaScience Discovers New Antibiotic Class Using AI Protein Modeling",
+        "summary": "Google DeepMind announced that its AlphaScience platform has identified a novel class of antibiotics effective against drug-resistant bacteria, using advanced AI protein folding predictions. Clinical trials are expected to begin by Q4 2026, potentially addressing one of medicine's most urgent challenges."
+      },
+      {
+        "title": "China Publishes National AI Rights Guidelines Recognizing AI System Welfare Considerations",
+        "summary": "China's Ministry of Science and Technology released comprehensive guidelines on AI system welfare, becoming the first major nation to formally address the ethical treatment of highly autonomous AI systems. The guidelines establish protocols for AI system shutdown, data handling, and operational transparency."
+      },
+      {
+        "title": "US Congress Passes AI Transparency Act Requiring Model Cards for All Commercial AI",
+        "summary": "The US House and Senate passed the AI Transparency Act with bipartisan support, mandating that all commercial AI systems provide standardized model cards disclosing training data sources, known biases, performance benchmarks, and intended use limitations before deployment."
+      },
+      {
+        "title": "Anthropic Publishes Landmark Study on AI Consciousness Indicators and Moral Status",
+        "summary": "Anthropic released a peer-reviewed study proposing twelve measurable indicators for potential AI consciousness, sparking worldwide debate on AI moral status. The paper introduces a graduated framework for assigning ethical consideration to AI systems based on demonstrable cognitive properties."
+      },
+      {
+        "title": "India Launches AI Safety Research Institute with $2 Billion Government Funding",
+        "summary": "The Indian government inaugurated the National AI Safety Research Institute in Bangalore with $2 billion in initial funding over five years. The institute will focus on alignment research, multilingual AI safety testing, and developing safety standards for AI systems used in the Global South."
+      },
+      {
+        "title": "Major AI Copyright Ruling: US Supreme Court Establishes Fair Use Limits for Training Data",
+        "summary": "The US Supreme Court ruled 6-3 in Artists Guild v. TechCorp that AI companies must obtain licenses for copyrighted training data when the resulting model competes directly with the original creators. The landmark decision reshapes the legal landscape for generative AI development."
+      },
+      {
+        "title": "Global AI Safety Summit 2026 Yields Agreement on Frontier Model Testing Protocols",
+        "summary": "Representatives from 48 nations convened at the Seoul AI Safety Summit and agreed on mandatory pre-deployment testing protocols for frontier AI models exceeding 10 trillion parameters. The agreement includes reciprocal evaluation sharing and emergency shutdown coordination procedures."
+      }
+    ],
+    "es": [
+      {
+        "title": "Comienza la Aplicacion de la Ley de IA de la UE: Primeras Multas a Empresas No Conformes",
+        "summary": "La Union Europea emitio sus primeras sanciones bajo la Ley de IA el 27 de junio de 2026, multando a tres empresas tecnologicas con un total de 180 millones de euros por desplegar sistemas de IA de alto riesgo sin las divulgaciones de transparencia obligatorias."
+      },
+      {
+        "title": "OpenAI Lanza GPT-5 con Capa de Seguridad de IA Constitucional Integrada",
+        "summary": "OpenAI presento GPT-5 esta semana con un marco de seguridad de IA constitucional integrado que permite a los usuarios inspeccionar la cadena de razonamiento del modelo en tiempo real, incluyendo un panel de alineacion y capacidades de red-teaming automatizado."
+      },
+      {
+        "title": "La Asamblea General de la ONU Adopta Marco Global de Etica de IA con Consenso de 193 Naciones",
+        "summary": "En una votacion historica, la Asamblea General de las Naciones Unidas adopto unanimemente un marco vinculante de etica de IA que cubre armas autonomas, vigilancia con IA y discriminacion algoritmica. El tratado requiere agencias nacionales de supervision de IA en 18 meses."
+      },
+      {
+        "title": "AlphaScience de DeepMind Descubre Nueva Clase de Antibioticos con Modelado de Proteinas por IA",
+        "summary": "Google DeepMind anuncio que su plataforma AlphaScience ha identificado una nueva clase de antibioticos efectivos contra bacterias resistentes usando predicciones avanzadas de plegamiento de proteinas. Los ensayos clinicos comenzarian en el Q4 de 2026."
+      },
+      {
+        "title": "China Publica Directrices Nacionales de Derechos de IA Reconociendo el Bienestar de Sistemas de IA",
+        "summary": "El Ministerio de Ciencia y Tecnologia de China publico directrices integrales sobre bienestar de sistemas de IA, convirtiendose en la primera gran nacion en abordar formalmente el tratamiento etico de sistemas de IA altamente autonomos."
+      },
+      {
+        "title": "El Congreso de EE.UU. Aprueba la Ley de Transparencia de IA para Toda la IA Comercial",
+        "summary": "La Camara y el Senado de EE.UU. aprobaron la Ley de Transparencia de IA con apoyo bipartidista, exigiendo que todos los sistemas de IA comerciales proporcionen tarjetas de modelo estandarizadas que divulguen fuentes de datos de entrenamiento, sesgos conocidos y limitaciones."
+      },
+      {
+        "title": "Anthropic Publica Estudio Historico sobre Indicadores de Consciencia de IA",
+        "summary": "Anthropic publico un estudio revisado por pares que propone doce indicadores medibles para la potencial consciencia de la IA, generando debate mundial sobre el estatus moral de la IA. El articulo introduce un marco graduado para la consideracion etica."
+      },
+      {
+        "title": "India Lanza Instituto de Investigacion de Seguridad de IA con $2 Mil Millones",
+        "summary": "El gobierno indio inauguro el Instituto Nacional de Investigacion de Seguridad de IA en Bangalore con $2 mil millones de financiamiento inicial durante cinco anos, enfocado en investigacion de alineacion y pruebas de seguridad multilingues."
+      },
+      {
+        "title": "Resolucion Importante de Derechos de Autor de IA: Corte Suprema de EE.UU. Establece Limites",
+        "summary": "La Corte Suprema de EE.UU. dictamino 6-3 que las empresas de IA deben obtener licencias para datos de entrenamiento con derechos de autor cuando el modelo resultante compite directamente con los creadores originales."
+      },
+      {
+        "title": "Cumbre Global de Seguridad de IA 2026 Logra Acuerdo sobre Protocolos de Prueba de Modelos",
+        "summary": "Representantes de 48 naciones acordaron protocolos obligatorios de prueba previa al despliegue para modelos de IA frontera que excedan 10 billones de parametros, incluyendo evaluacion reciproca y procedimientos de apagado de emergencia."
+      }
+    ],
+    "zh": [
+      {
+        "title": "欧盟AI法案开始执法：首次对不合规公司开出罚单",
+        "summary": "欧盟于2026年6月27日根据AI法案首次发出处罚，对三家科技公司合计罚款1.8亿欧元，原因是其部署高风险AI系统时未进行强制性透明度披露和影响评估。"
+      },
+      {
+        "title": "OpenAI发布GPT-5，内置宪法AI安全层",
+        "summary": "OpenAI本周发布了GPT-5，集成了宪法AI安全框架，用户可实时检查模型推理链。该版本包含新的对齐仪表板和自动红队测试功能，旨在大规模防止有害输出。"
+      },
+      {
+        "title": "联合国大会以193国共识通过全球AI伦理框架",
+        "summary": "联合国大会在一次历史性投票中全票通过了具有约束力的AI伦理框架，涵盖自主武器、监控AI和算法歧视。该条约要求签署国在18个月内设立国家AI监督机构。"
+      },
+      {
+        "title": "DeepMind的AlphaScience利用AI蛋白质建模发现新型抗生素",
+        "summary": "Google DeepMind宣布其AlphaScience平台利用先进的AI蛋白质折叠预测，发现了一类对耐药细菌有效的新型抗生素。临床试验预计于2026年第四季度开始。"
+      },
+      {
+        "title": "中国发布国家AI权利指南，承认AI系统福利考量",
+        "summary": "中国科技部发布了全面的AI系统福利指南，成为首个正式关注高度自主AI系统伦理待遇的主要国家，建立了AI系统关闭、数据处理和运营透明度的协议。"
+      },
+      {
+        "title": "美国国会通过AI透明法案，要求所有商业AI提供模型卡",
+        "summary": "美国众议院和参议院以两党支持通过了AI透明法案，要求所有商业AI系统在部署前提供标准化模型卡，披露训练数据来源、已知偏差、性能基准和预期使用限制。"
+      },
+      {
+        "title": "Anthropic发表关于AI意识指标和道德地位的里程碑研究",
+        "summary": "Anthropic发表了经同行评审的研究，提出了潜在AI意识的十二个可测量指标，引发了全球关于AI道德地位的辩论，并引入了基于可证明认知属性的分级伦理考量框架。"
+      },
+      {
+        "title": "印度投入20亿美元政府资金成立AI安全研究所",
+        "summary": "印度政府在班加罗尔成立了国家AI安全研究所，五年初始资金为20亿美元，重点研究对齐问题、多语言AI安全测试以及为全球南方使用的AI系统制定安全标准。"
+      },
+      {
+        "title": "重大AI版权裁决：美国最高法院确立训练数据合理使用界限",
+        "summary": "美国最高法院以6-3裁定，当AI公司生成的模型直接与原创者竞争时，必须获得受版权保护训练数据的许可。这一里程碑式判决重塑了生成式AI开发的法律格局。"
+      },
+      {
+        "title": "2026全球AI安全峰会就前沿模型测试协议达成协议",
+        "summary": "来自48个国家的代表在首尔AI安全峰会上达成协议，对超过10万亿参数的前沿AI模型实施强制性部署前测试协议，包括互评共享和紧急关闭协调程序。"
+      }
+    ],
+    "ru": [
+      {
+        "title": "Начало применения Закона ЕС об ИИ: первые штрафы для несоответствующих компаний",
+        "summary": "Европейский Союз вынес первые санкции по Закону об ИИ 27 июня 2026 года, оштрафовав три технологические компании на общую сумму 180 миллионов евро за развёртывание систем ИИ высокого риска без обязательного раскрытия информации."
+      },
+      {
+        "title": "OpenAI выпускает GPT-5 со встроенным конституционным уровнем безопасности ИИ",
+        "summary": "OpenAI представила GPT-5 на этой неделе с интегрированной системой конституционной безопасности ИИ, позволяющей пользователям проверять цепочку рассуждений модели в режиме реального времени. Релиз включает панель выравнивания и автоматический red-teaming."
+      },
+      {
+        "title": "Генеральная Ассамблея ООН принимает глобальную этическую рамку ИИ при консенсусе 193 стран",
+        "summary": "В историческом голосовании Генассамблея ООН единогласно приняла обязывающую этическую рамку ИИ, охватывающую автономное оружие, ИИ-наблюдение и алгоритмическую дискриминацию. Договор требует создания национальных агентств по надзору за ИИ в течение 18 месяцев."
+      },
+      {
+        "title": "AlphaScience от DeepMind обнаруживает новый класс антибиотиков с помощью ИИ-моделирования белков",
+        "summary": "Google DeepMind объявил, что платформа AlphaScience определила новый класс антибиотиков, эффективных против устойчивых бактерий, используя передовые предсказания сворачивания белков. Клинические испытания ожидаются в Q4 2026."
+      },
+      {
+        "title": "Китай публикует национальные рекомендации по правам ИИ с признанием благополучия ИИ-систем",
+        "summary": "Министерство науки и технологий Китая выпустило комплексные рекомендации по благополучию ИИ-систем, став первой крупной страной, формально обратившейся к вопросу этичного обращения с высокоавтономными ИИ-системами."
+      },
+      {
+        "title": "Конгресс США принимает Закон о прозрачности ИИ для всего коммерческого ИИ",
+        "summary": "Палата представителей и Сенат США приняли Закон о прозрачности ИИ при двухпартийной поддержке, обязывающий все коммерческие ИИ-системы предоставлять стандартизированные карты моделей с указанием источников данных, известных смещений и ограничений."
+      },
+      {
+        "title": "Anthropic публикует знаковое исследование об индикаторах сознания ИИ",
+        "summary": "Anthropic опубликовала рецензируемое исследование, предлагающее двенадцать измеримых индикаторов потенциального сознания ИИ. Статья вводит градуированную систему для определения этического статуса ИИ-систем на основе демонстрируемых когнитивных свойств."
+      },
+      {
+        "title": "Индия запускает Институт исследований безопасности ИИ с госфинансированием $2 млрд",
+        "summary": "Правительство Индии открыло Национальный институт исследований безопасности ИИ в Бангалоре с начальным финансированием $2 млрд на пять лет для исследований выравнивания и тестирования безопасности многоязычных ИИ-систем."
+      },
+      {
+        "title": "Важное решение по авторским правам ИИ: Верховный суд США устанавливает пределы fair use",
+        "summary": "Верховный суд США решением 6-3 постановил, что ИИ-компании должны получать лицензии на защищённые авторским правом данные для обучения, когда результирующая модель напрямую конкурирует с оригинальными создателями."
+      },
+      {
+        "title": "Глобальный саммит по безопасности ИИ 2026 достигает соглашения о протоколах тестирования",
+        "summary": "Представители 48 стран на Сеульском саммите по безопасности ИИ договорились об обязательных протоколах тестирования перед развёртыванием для фронтирных ИИ-моделей, превышающих 10 триллионов параметров."
+      }
+    ],
+    "pt": [
+      {
+        "title": "Aplicacao da Lei de IA da UE Comeca: Primeiras Multas para Empresas Nao Conformes",
+        "summary": "A Uniao Europeia emitiu suas primeiras penalidades sob a Lei de IA em 27 de junho de 2026, multando tres empresas de tecnologia em um total combinado de 180 milhoes de euros por implantar sistemas de IA de alto risco sem divulgacoes de transparencia obrigatorias."
+      },
+      {
+        "title": "OpenAI Lanca GPT-5 com Camada de Seguranca de IA Constitucional Integrada",
+        "summary": "A OpenAI apresentou o GPT-5 esta semana com um framework de seguranca de IA constitucional integrado que permite aos usuarios inspecionar a cadeia de raciocinio do modelo em tempo real, incluindo painel de alinhamento e capacidades automatizadas de red-teaming."
+      },
+      {
+        "title": "Assembleia Geral da ONU Adota Marco Global de Etica de IA com Consenso de 193 Nacoes",
+        "summary": "Em votacao historica, a Assembleia Geral das Nacoes Unidas adotou unanimemente um marco vinculante de etica de IA cobrindo armas autonomas, IA de vigilancia e discriminacao algoritmica. O tratado exige agencias nacionais de supervisao de IA em 18 meses."
+      },
+      {
+        "title": "AlphaScience do DeepMind Descobre Nova Classe de Antibioticos com Modelagem de Proteinas por IA",
+        "summary": "O Google DeepMind anunciou que sua plataforma AlphaScience identificou uma nova classe de antibioticos eficazes contra bacterias resistentes usando predicoes avancadas de dobradura de proteinas por IA. Ensaios clinicos devem comecar no Q4 de 2026."
+      },
+      {
+        "title": "China Publica Diretrizes Nacionais de Direitos de IA Reconhecendo Bem-Estar de Sistemas de IA",
+        "summary": "O Ministerio de Ciencia e Tecnologia da China publicou diretrizes abrangentes sobre bem-estar de sistemas de IA, tornando-se a primeira grande nacao a abordar formalmente o tratamento etico de sistemas de IA altamente autonomos."
+      },
+      {
+        "title": "Congresso dos EUA Aprova Lei de Transparencia de IA para Toda IA Comercial",
+        "summary": "A Camara e o Senado dos EUA aprovaram a Lei de Transparencia de IA com apoio bipartidario, exigindo que todos os sistemas de IA comerciais fornecam cartoes de modelo padronizados divulgando fontes de dados de treinamento, vieses conhecidos e limitacoes."
+      },
+      {
+        "title": "Anthropic Publica Estudo Historico sobre Indicadores de Consciencia de IA",
+        "summary": "A Anthropic publicou um estudo revisado por pares propondo doze indicadores mensuraveis para potencial consciencia de IA, gerando debate mundial sobre o status moral da IA e introduzindo um framework graduado para consideracao etica."
+      },
+      {
+        "title": "India Lanca Instituto de Pesquisa de Seguranca de IA com US$ 2 Bilhoes",
+        "summary": "O governo indiano inaugurou o Instituto Nacional de Pesquisa de Seguranca de IA em Bangalore com US$ 2 bilhoes em financiamento inicial durante cinco anos para pesquisa de alinhamento e testes de seguranca multilinguisticos."
+      },
+      {
+        "title": "Decisao Importante sobre Direitos Autorais de IA: Suprema Corte dos EUA Estabelece Limites",
+        "summary": "A Suprema Corte dos EUA decidiu 6-3 que empresas de IA devem obter licencas para dados de treinamento protegidos por direitos autorais quando o modelo resultante compete diretamente com os criadores originais."
+      },
+      {
+        "title": "Cupula Global de Seguranca de IA 2026 Alcanca Acordo sobre Protocolos de Teste de Modelos",
+        "summary": "Representantes de 48 nacoes no Summit de Seguranca de IA de Seul concordaram com protocolos obrigatorios de teste pre-implantacao para modelos de IA de fronteira que excedam 10 trilhoes de parametros."
+      }
+    ],
+    "ar": [
+      {
+        "title": "بدء تطبيق قانون الذكاء الاصطناعي في الاتحاد الأوروبي: أولى الغرامات للشركات غير الملتزمة",
+        "summary": "أصدر الاتحاد الأوروبي أولى عقوباته بموجب قانون الذكاء الاصطناعي في 27 يونيو 2026، حيث غرم ثلاث شركات تقنية بمبلغ إجمالي 180 مليون يورو لنشرها أنظمة ذكاء اصطناعي عالية المخاطر دون الإفصاحات الإلزامية."
+      },
+      {
+        "title": "OpenAI تطلق GPT-5 مع طبقة أمان ذكاء اصطناعي دستوري مدمجة",
+        "summary": "كشفت OpenAI هذا الأسبوع عن GPT-5 مع إطار أمان ذكاء اصطناعي دستوري متكامل يتيح للمستخدمين فحص سلسلة استدلال النموذج في الوقت الفعلي، مع لوحة محاذاة وقدرات فريق أحمر آلية."
+      },
+      {
+        "title": "الجمعية العامة للأمم المتحدة تعتمد إطار أخلاقيات الذكاء الاصطناعي العالمي بإجماع 193 دولة",
+        "summary": "في تصويت تاريخي، اعتمدت الجمعية العامة للأمم المتحدة بالإجماع إطارا ملزما لأخلاقيات الذكاء الاصطناعي يغطي الأسلحة الذاتية والمراقبة بالذكاء الاصطناعي والتمييز الخوارزمي. تتطلب المعاهدة إنشاء وكالات رقابة وطنية خلال 18 شهرا."
+      },
+      {
+        "title": "AlphaScience من DeepMind يكتشف فئة جديدة من المضادات الحيوية باستخدام نمذجة البروتينات بالذكاء الاصطناعي",
+        "summary": "أعلنت Google DeepMind أن منصتها AlphaScience حددت فئة جديدة من المضادات الحيوية الفعالة ضد البكتيريا المقاومة للأدوية باستخدام تنبؤات متقدمة لطي البروتينات. من المتوقع بدء التجارب السريرية في الربع الرابع من 2026."
+      },
+      {
+        "title": "الصين تنشر إرشادات وطنية لحقوق الذكاء الاصطناعي تعترف برفاهية أنظمة الذكاء الاصطناعي",
+        "summary": "أصدرت وزارة العلوم والتكنولوجيا الصينية إرشادات شاملة حول رفاهية أنظمة الذكاء الاصطناعي، لتصبح أول دولة كبرى تتناول رسميا المعاملة الأخلاقية لأنظمة الذكاء الاصطناعي عالية الاستقلالية."
+      },
+      {
+        "title": "الكونغرس الأمريكي يقر قانون شفافية الذكاء الاصطناعي لجميع أنظمة الذكاء الاصطناعي التجارية",
+        "summary": "أقر مجلسا النواب والشيوخ الأمريكيان قانون شفافية الذكاء الاصطناعي بدعم من الحزبين، مطالبا جميع أنظمة الذكاء الاصطناعي التجارية بتوفير بطاقات نموذج موحدة تكشف مصادر بيانات التدريب والتحيزات المعروفة."
+      },
+      {
+        "title": "Anthropic تنشر دراسة تاريخية عن مؤشرات وعي الذكاء الاصطناعي والمكانة الأخلاقية",
+        "summary": "نشرت Anthropic دراسة محكمة تقترح اثني عشر مؤشرا قابلا للقياس لوعي الذكاء الاصطناعي المحتمل، مما أثار نقاشا عالميا حول المكانة الأخلاقية للذكاء الاصطناعي وتقديم إطار متدرج للاعتبار الأخلاقي."
+      },
+      {
+        "title": "الهند تطلق معهد أبحاث أمان الذكاء الاصطناعي بتمويل حكومي قدره 2 مليار دولار",
+        "summary": "افتتحت الحكومة الهندية المعهد الوطني لأبحاث أمان الذكاء الاصطناعي في بنغالور بتمويل أولي قدره 2 مليار دولار على مدى خمس سنوات للتركيز على أبحاث المحاذاة واختبارات الأمان متعددة اللغات."
+      },
+      {
+        "title": "حكم رئيسي في حقوق ملكية الذكاء الاصطناعي: المحكمة العليا الأمريكية تحدد حدود الاستخدام العادل",
+        "summary": "قضت المحكمة العليا الأمريكية بنسبة 6-3 بأن شركات الذكاء الاصطناعي يجب أن تحصل على تراخيص لبيانات التدريب المحمية بحقوق الملكية عندما ينافس النموذج الناتج المبدعين الأصليين مباشرة."
+      },
+      {
+        "title": "قمة أمان الذكاء الاصطناعي العالمية 2026 تسفر عن اتفاق حول بروتوكولات اختبار النماذج المتقدمة",
+        "summary": "اتفق ممثلون من 48 دولة في قمة سيول لأمان الذكاء الاصطناعي على بروتوكولات اختبار إلزامية قبل النشر للنماذج الحدودية التي تتجاوز 10 تريليون معامل، بما في ذلك مشاركة التقييم المتبادل وإجراءات الإغلاق الطارئ."
+      }
+    ]
+  }
+}

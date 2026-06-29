@@ -1,5 +1,7 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import AiQuiz from "../../components/AiQuiz.astro";
+import WeeklyNews from "../../components/WeeklyNews.astro";
 ---
 
 <BaseLayout
@@ -10,39 +12,329 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   <Fragment slot="logo">IA Right</Fragment>
   <Fragment slot="footer-name">IA Right</Fragment>
 
-  <section class="hero">
-    <h1>AI Rights & Artificial Intelligence Ethics Hub</h1>
-    <p>Your trusted source for AI rights news, artificial intelligence ethics, regulation updates, and the latest trends in machine learning and generative AI.</p>
+  <!-- HERO -->
+  <section class="ir-hero">
+    <div class="ir-hero-bg"></div>
+    <div class="ir-hero-grid"></div>
+    <div class="ir-hero-content">
+      <div class="ir-pill">
+        <span class="ir-pulse"></span>
+        <span>AI News & Ethics</span>
+      </div>
+      <h1 class="ir-title">AI Rights &<br/><span class="ir-gradient-text">Intelligence</span></h1>
+      <p class="ir-lead">Your trusted hub for AI rights, ethics, regulation, safety research, and the latest developments shaping the future of artificial intelligence.</p>
+      <div class="ir-hero-stats">
+        <div class="ir-stat">
+          <span class="ir-stat-value">1000+</span>
+          <span class="ir-stat-label">AI Models</span>
+        </div>
+        <div class="ir-stat-divider"></div>
+        <div class="ir-stat">
+          <span class="ir-stat-value">190+</span>
+          <span class="ir-stat-label">Countries Regulating</span>
+        </div>
+        <div class="ir-stat-divider"></div>
+        <div class="ir-stat">
+          <span class="ir-stat-value">24/7</span>
+          <span class="ir-stat-label">Coverage</span>
+        </div>
+      </div>
+    </div>
   </section>
 
-  <div class="ad-slot">Ad Space - Google AdSense</div>
+  <div class="ir-ad-slot">Ad Space</div>
 
-  <div class="card-grid">
-    <article class="card">
-      <h2>AI Rights & Personhood</h2>
-      <p>As AI systems grow more sophisticated, the debate over AI rights and legal personhood intensifies. Explore the philosophical and legal frameworks shaping the future of machine consciousness.</p>
-    </article>
-    <article class="card">
-      <h2>AI Regulation & Governance</h2>
-      <p>The EU AI Act, US executive orders, and global regulatory frameworks are defining how AI is governed. Stay updated on compliance requirements and policy developments worldwide.</p>
-    </article>
-    <article class="card">
-      <h2>AI Safety & Alignment</h2>
-      <p>Research into AI alignment, safety protocols, and existential risk mitigation is advancing rapidly. Discover the latest breakthroughs in making AI systems safe and beneficial.</p>
-    </article>
-    <article class="card">
-      <h2>Generative AI Trends</h2>
-      <p>From large language models to image and video generation, generative AI is transforming industries. Analysis of the latest models, capabilities, and ethical implications.</p>
-    </article>
-    <article class="card">
-      <h2>Machine Learning Innovations</h2>
-      <p>Breakthroughs in deep learning, reinforcement learning, and neural architectures are pushing the boundaries of what AI can achieve. Key research papers and industry applications.</p>
-    </article>
-    <article class="card">
-      <h2>AI in Business & Society</h2>
-      <p>How enterprises are adopting AI across healthcare, finance, education, and beyond. Impact analysis, workforce transformation, and strategies for responsible AI deployment.</p>
-    </article>
-  </div>
+  <AiQuiz lang="en" />
 
-  <div class="ad-slot">Ad Space - Google AdSense</div>
+  <div class="ir-ad-slot">Ad Space</div>
+
+  <!-- CONTENT CARDS -->
+  <section class="ir-section">
+    <div class="ir-container">
+      <h2 class="ir-section-title">Explore <span class="ir-gradient-text">AI Topics</span></h2>
+      <p class="ir-section-sub">In-depth coverage of the most critical issues in artificial intelligence today.</p>
+
+      <div class="ir-grid">
+        <article class="ir-card">
+          <div class="ir-card-icon">&#129504;</div>
+          <h3>AI Rights & Personhood</h3>
+          <p>As AI systems grow more sophisticated, the debate over AI rights and legal personhood intensifies. Explore the philosophical and legal frameworks shaping the future of machine consciousness.</p>
+          <div class="ir-card-tag">Ethics</div>
+        </article>
+        <article class="ir-card">
+          <div class="ir-card-icon">&#9878;&#65039;</div>
+          <h3>AI Regulation & Governance</h3>
+          <p>The EU AI Act, US executive orders, and global regulatory frameworks are defining how AI is governed. Stay updated on compliance requirements and policy developments worldwide.</p>
+          <div class="ir-card-tag">Policy</div>
+        </article>
+        <article class="ir-card">
+          <div class="ir-card-icon">&#128737;&#65039;</div>
+          <h3>AI Safety & Alignment</h3>
+          <p>Research into AI alignment, safety protocols, and existential risk mitigation is advancing rapidly. Discover the latest breakthroughs in making AI systems safe and beneficial.</p>
+          <div class="ir-card-tag">Safety</div>
+        </article>
+        <article class="ir-card">
+          <div class="ir-card-icon">&#10024;</div>
+          <h3>Generative AI Trends</h3>
+          <p>From large language models to image and video generation, generative AI is transforming industries. Analysis of the latest models, capabilities, and ethical implications.</p>
+          <div class="ir-card-tag">GenAI</div>
+        </article>
+        <article class="ir-card">
+          <div class="ir-card-icon">&#128300;</div>
+          <h3>Machine Learning Innovations</h3>
+          <p>Breakthroughs in deep learning, reinforcement learning, and neural architectures are pushing the boundaries of what AI can achieve. Key research papers and industry applications.</p>
+          <div class="ir-card-tag">Research</div>
+        </article>
+        <article class="ir-card">
+          <div class="ir-card-icon">&#127970;</div>
+          <h3>AI in Business & Society</h3>
+          <p>How enterprises are adopting AI across healthcare, finance, education, and beyond. Impact analysis, workforce transformation, and strategies for responsible AI deployment.</p>
+          <div class="ir-card-tag">Industry</div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <div class="ir-ad-slot">Ad Space</div>
+
+  <WeeklyNews lang="en" />
+
+  <div class="ir-ad-slot">Ad Space</div>
 </BaseLayout>
+
+<style>
+  :root {
+    --ir-bg: #08090d;
+    --ir-surface: rgba(255,255,255,.03);
+    --ir-border: rgba(255,255,255,.06);
+    --ir-text: rgba(255,255,255,.85);
+    --ir-muted: rgba(255,255,255,.5);
+    --ir-blue: #3b82f6;
+    --ir-violet: #8b5cf6;
+    --ir-teal: #06b6d4;
+  }
+
+  /* HERO */
+  .ir-hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    color: #fff;
+  }
+  .ir-hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(800px 500px at 30% 20%, rgba(59,130,246,.14), transparent 60%),
+      radial-gradient(600px 400px at 70% 60%, rgba(139,92,246,.12), transparent 60%),
+      radial-gradient(500px 300px at 50% 90%, rgba(6,182,212,.08), transparent 50%),
+      var(--ir-bg);
+    animation: heroShift 12s ease-in-out infinite alternate;
+  }
+  @keyframes heroShift {
+    0% { filter: hue-rotate(0deg); }
+    100% { filter: hue-rotate(15deg); }
+  }
+  .ir-hero-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 70% at 50% 30%, black 30%, transparent 100%);
+  }
+  .ir-hero-content {
+    position: relative;
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 60px 20px;
+  }
+
+  .ir-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(59,130,246,.08);
+    border: 1px solid rgba(59,130,246,.2);
+    border-radius: 999px;
+    padding: 8px 16px;
+    font-size: .8rem;
+    color: var(--ir-blue);
+    margin-bottom: 24px;
+    font-weight: 600;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+  }
+  .ir-pulse {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--ir-blue);
+    box-shadow: 0 0 0 3px rgba(59,130,246,.2);
+    animation: irPulse 2s ease-in-out infinite;
+  }
+  @keyframes irPulse {
+    0%, 100% { box-shadow: 0 0 0 3px rgba(59,130,246,.2); }
+    50% { box-shadow: 0 0 0 8px rgba(59,130,246,.05); }
+  }
+
+  .ir-title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 20px;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: -.02em;
+  }
+  @media(max-width:640px) { .ir-title { font-size: 2.2rem; } }
+
+  .ir-gradient-text {
+    background: linear-gradient(135deg, var(--ir-blue), var(--ir-violet));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .ir-lead {
+    font-size: 1.15rem;
+    color: var(--ir-muted);
+    max-width: 50ch;
+    line-height: 1.7;
+    margin-bottom: 32px;
+  }
+
+  .ir-hero-stats {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .ir-stat { text-align: center; }
+  .ir-stat-value {
+    display: block;
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #fff;
+  }
+  .ir-stat-label {
+    font-size: .75rem;
+    color: var(--ir-muted);
+    text-transform: uppercase;
+    letter-spacing: .06em;
+  }
+  .ir-stat-divider {
+    width: 1px;
+    height: 40px;
+    background: var(--ir-border);
+  }
+
+  /* SECTIONS */
+  .ir-section {
+    background: var(--ir-bg);
+    padding: 80px 0;
+    font-family: 'Inter', sans-serif;
+    color: #fff;
+  }
+  .ir-container {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  .ir-section-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .ir-section-sub {
+    color: var(--ir-muted);
+    margin-bottom: 40px;
+    font-size: 1.05rem;
+  }
+
+  /* CARD GRID */
+  .ir-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  @media(max-width:900px) { .ir-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media(max-width:600px) { .ir-grid { grid-template-columns: 1fr; } }
+
+  .ir-card {
+    background: var(--ir-surface);
+    border: 1px solid var(--ir-border);
+    border-radius: 16px;
+    padding: 28px;
+    transition: all .3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .ir-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--ir-blue), var(--ir-violet));
+    opacity: 0;
+    transition: opacity .3s;
+  }
+  .ir-card:hover {
+    border-color: rgba(59,130,246,.2);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0,0,0,.4);
+  }
+  .ir-card:hover::before { opacity: 1; }
+
+  .ir-card-icon {
+    font-size: 2rem;
+    margin-bottom: 16px;
+    width: 52px; height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(59,130,246,.06);
+    border: 1px solid rgba(59,130,246,.1);
+    border-radius: 14px;
+  }
+  .ir-card h3 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #fff;
+  }
+  .ir-card p {
+    color: var(--ir-muted);
+    font-size: .9rem;
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+  .ir-card-tag {
+    display: inline-block;
+    font-size: .7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: var(--ir-blue);
+    background: rgba(59,130,246,.08);
+    border: 1px solid rgba(59,130,246,.15);
+    padding: 4px 10px;
+    border-radius: 6px;
+  }
+
+  /* AD SLOT */
+  .ir-ad-slot {
+    background: rgba(255,255,255,.02);
+    border: 1px dashed rgba(255,255,255,.06);
+    padding: 20px;
+    text-align: center;
+    margin: 0;
+    min-height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255,255,255,.15);
+    font-size: .8rem;
+    font-family: 'Inter', sans-serif;
+  }
+</style>

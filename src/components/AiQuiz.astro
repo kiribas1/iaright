@@ -1,0 +1,564 @@
+---
+interface Props {
+  lang: string;
+}
+const { lang } = Astro.props;
+
+const labels: Record<string, Record<string, string>> = {
+  en: { title: 'AI or Human?', subtitle: 'Can you tell if AI or a human created/did this? Test your knowledge!', score: 'Score', of: 'of', correct: 'Correct!', wrong: 'Wrong!', ai: 'AI', human: 'Human', playAgain: 'Play Again', next: 'Next Question', finalScore: 'Final Score', great: 'You really know your AI!', good: 'Not bad, but AI keeps surprising us!', tryHarder: 'The line between AI and human keeps blurring!' },
+  es: { title: 'IA o Humano?', subtitle: 'Puedes distinguir si una IA o un humano hizo esto? Pon a prueba tus conocimientos!', score: 'Puntos', of: 'de', correct: 'Correcto!', wrong: 'Incorrecto!', ai: 'IA', human: 'Humano', playAgain: 'Jugar de Nuevo', next: 'Siguiente', finalScore: 'Puntaje Final', great: 'Realmente conoces la IA!', good: 'No esta mal, pero la IA sigue sorprendiendonos!', tryHarder: 'La linea entre IA y humano sigue difuminandose!' },
+  zh: { title: 'AI还是人类?', subtitle: '你能分辨这是AI还是人类做的吗？测试你的知识！', score: '得分', of: '/', correct: '正确!', wrong: '错误!', ai: 'AI', human: '人类', playAgain: '再玩一次', next: '下一题', finalScore: '最终得分', great: '你真的很了解AI!', good: '不错，但AI一直在给我们惊喜!', tryHarder: 'AI和人类之间的界限越来越模糊!' },
+  ru: { title: 'ИИ или Человек?', subtitle: 'Сможете ли вы определить, сделал это ИИ или человек? Проверьте свои знания!', score: 'Счёт', of: 'из', correct: 'Верно!', wrong: 'Неверно!', ai: 'ИИ', human: 'Человек', playAgain: 'Играть снова', next: 'Далее', finalScore: 'Итоговый счёт', great: 'Вы отлично разбираетесь в ИИ!', good: 'Неплохо, но ИИ продолжает удивлять!', tryHarder: 'Грань между ИИ и человеком всё тоньше!' },
+  pt: { title: 'IA ou Humano?', subtitle: 'Voce consegue identificar se foi IA ou um humano que fez isso? Teste seu conhecimento!', score: 'Pontos', of: 'de', correct: 'Correto!', wrong: 'Errado!', ai: 'IA', human: 'Humano', playAgain: 'Jogar Novamente', next: 'Proxima', finalScore: 'Pontuacao Final', great: 'Voce realmente entende de IA!', good: 'Nada mal, mas a IA continua nos surpreendendo!', tryHarder: 'A linha entre IA e humano continua se diluindo!' },
+  ar: { title: 'ذكاء اصطناعي أم بشر؟', subtitle: 'هل يمكنك معرفة إذا كان الذكاء الاصطناعي أو الإنسان قد صنع هذا؟ اختبر معرفتك!', score: 'النقاط', of: 'من', correct: 'صحيح!', wrong: 'خطأ!', ai: 'ذكاء اصطناعي', human: 'بشر', playAgain: 'العب مرة أخرى', next: 'التالي', finalScore: 'النتيجة النهائية', great: 'أنت حقا تعرف الذكاء الاصطناعي!', good: 'ليس سيئا، لكن الذكاء الاصطناعي يستمر بمفاجأتنا!', tryHarder: 'الخط بين الذكاء الاصطناعي والبشر يزداد ضبابية!' },
+};
+const t = labels[lang] || labels.en;
+const tJson = JSON.stringify(t);
+---
+
+<section class="aq-section" id="ai-quiz">
+  <div class="aq-container">
+    <h2 class="aq-title">{t.title}</h2>
+    <p class="aq-subtitle">{t.subtitle}</p>
+
+    <div class="aq-score-bar">
+      <span class="aq-score-label">{t.score}: <strong id="aq-score">0</strong> <span id="aq-of-total"></span></span>
+      <div class="aq-progress-wrap">
+        <div class="aq-progress-bar" id="aq-progress"></div>
+      </div>
+    </div>
+
+    <div class="aq-question-card" id="aq-question-card">
+      <p class="aq-question-text" id="aq-question"></p>
+      <div class="aq-options" id="aq-options"></div>
+      <div class="aq-feedback aq-hidden" id="aq-feedback"></div>
+      <p class="aq-funfact aq-hidden" id="aq-funfact"></p>
+      <button class="aq-btn-next aq-hidden" id="aq-next">{t.next}</button>
+    </div>
+
+    <div class="aq-final aq-hidden" id="aq-final">
+      <div class="aq-final-score" id="aq-final-score"></div>
+      <p class="aq-final-msg" id="aq-final-msg"></p>
+      <button class="aq-btn-play" onclick="location.reload()">{t.playAgain}</button>
+    </div>
+  </div>
+</section>
+
+<script is:inline define:vars={{ tJson, lang }}>
+const t = JSON.parse(tJson);
+
+const questions = [
+  {
+    q: {
+      en: "This painting sold for $432,500 at Christie's auction house.",
+      es: "Esta pintura se vendio por $432,500 en la casa de subastas Christie's.",
+      zh: "这幅画在佳士得拍卖行以432,500美元售出。",
+      ru: "Эта картина была продана за $432,500 на аукционе Christie's.",
+      pt: "Esta pintura foi vendida por $432.500 na casa de leiloes Christie's.",
+      ar: "بيعت هذه اللوحة بمبلغ 432,500 دولار في دار كريستيز للمزادات."
+    },
+    a: "ai",
+    fact: {
+      en: "The portrait 'Edmond de Belamy' was created by the AI art collective Obvious using GANs, and sold at Christie's in 2018.",
+      es: "El retrato 'Edmond de Belamy' fue creado por el colectivo de arte IA Obvious usando GANs y se vendio en Christie's en 2018.",
+      zh: "'Edmond de Belamy'肖像由AI艺术团体Obvious使用GAN创作，2018年在佳士得售出。",
+      ru: "Портрет 'Эдмонд де Белами' был создан коллективом ИИ-искусства Obvious с помощью GAN и продан на Christie's в 2018.",
+      pt: "O retrato 'Edmond de Belamy' foi criado pelo coletivo de arte IA Obvious usando GANs e vendido na Christie's em 2018.",
+      ar: "لوحة 'إدموند دي بيلامي' أنشأتها مجموعة الفن بالذكاء الاصطناعي Obvious باستخدام شبكات GAN وبيعت في كريستيز عام 2018."
+    }
+  },
+  {
+    q: {
+      en: "This protein structure prediction tool won the Nobel Prize in Chemistry in 2024.",
+      es: "Esta herramienta de prediccion de estructura de proteinas gano el Premio Nobel de Quimica en 2024.",
+      zh: "这个蛋白质结构预测工具获得了2024年诺贝尔化学奖。",
+      ru: "Этот инструмент предсказания структуры белков получил Нобелевскую премию по химии в 2024.",
+      pt: "Esta ferramenta de predicao de estrutura de proteinas ganhou o Premio Nobel de Quimica em 2024.",
+      ar: "فازت أداة التنبؤ ببنية البروتين هذه بجائزة نوبل في الكيمياء عام 2024."
+    },
+    a: "ai",
+    fact: {
+      en: "AlphaFold by DeepMind solved the 50-year-old protein folding problem. Its creators Demis Hassabis and John Jumper won the 2024 Nobel Prize in Chemistry.",
+      es: "AlphaFold de DeepMind resolvio el problema del plegamiento de proteinas de 50 anos. Sus creadores Demis Hassabis y John Jumper ganaron el Nobel de Quimica 2024.",
+      zh: "DeepMind的AlphaFold解决了50年来的蛋白质折叠问题。创造者Demis Hassabis和John Jumper获得了2024年诺贝尔化学奖。",
+      ru: "AlphaFold от DeepMind решил 50-летнюю проблему свёртывания белков. Создатели Демис Хассабис и Джон Джампер получили Нобелевскую премию по химии 2024.",
+      pt: "O AlphaFold do DeepMind resolveu o problema de 50 anos do dobramento de proteinas. Seus criadores Demis Hassabis e John Jumper ganharam o Nobel de Quimica 2024.",
+      ar: "حل AlphaFold من DeepMind مشكلة طي البروتين التي استمرت 50 عاما. فاز مبتكروه ديميس هاسابيس وجون جامبر بجائزة نوبل في الكيمياء 2024."
+    }
+  },
+  {
+    q: {
+      en: "This symphony was performed at the Beethoven anniversary concert in Bonn, Germany.",
+      es: "Esta sinfonia fue interpretada en el concierto de aniversario de Beethoven en Bonn, Alemania.",
+      zh: "这首交响乐在德国波恩的贝多芬纪念音乐会上演出。",
+      ru: "Эта симфония была исполнена на юбилейном концерте Бетховена в Бонне, Германия.",
+      pt: "Esta sinfonia foi apresentada no concerto de aniversario de Beethoven em Bonn, Alemanha.",
+      ar: "عُزفت هذه السيمفونية في حفل ذكرى بيتهوفن في بون، ألمانيا."
+    },
+    a: "ai",
+    fact: {
+      en: "AIVA (Artificial Intelligence Virtual Artist) composed symphonic works that were performed at prestigious venues. It was the first AI recognized as a composer by a music rights society (SACEM).",
+      es: "AIVA compuso obras sinfonicas interpretadas en lugares prestigiosos. Fue la primera IA reconocida como compositora por una sociedad de derechos musicales (SACEM).",
+      zh: "AIVA创作的交响乐在著名场馆演出。它是第一个被音乐版权组织(SACEM)认可的AI作曲家。",
+      ru: "AIVA создала симфонические произведения для престижных площадок. Она стала первым ИИ, признанным композитором обществом музыкальных прав (SACEM).",
+      pt: "A AIVA compôs obras sinfonicas apresentadas em locais prestigiados. Foi a primeira IA reconhecida como compositora por uma sociedade de direitos musicais (SACEM).",
+      ar: "ألفت AIVA أعمالا سيمفونية عُزفت في أماكن مرموقة. كانت أول ذكاء اصطناعي يُعترف به كمؤلف من قبل جمعية حقوق الموسيقى (SACEM)."
+    }
+  },
+  {
+    q: {
+      en: "This code review caught a critical use-after-free vulnerability in the Linux kernel's networking stack.",
+      es: "Esta revision de codigo detecto una vulnerabilidad critica use-after-free en la pila de red del kernel de Linux.",
+      zh: "这次代码审查发现了Linux内核网络栈中一个关键的释放后使用(use-after-free)漏洞。",
+      ru: "Этот код-ревью обнаружил критическую уязвимость use-after-free в сетевом стеке ядра Linux.",
+      pt: "Esta revisao de codigo detectou uma vulnerabilidade critica use-after-free na pilha de rede do kernel Linux.",
+      ar: "اكتشفت مراجعة الكود هذه ثغرة حرجة من نوع use-after-free في مكدس الشبكات لنواة لينكس."
+    },
+    a: "human",
+    fact: {
+      en: "Linux kernel security reviews are primarily done by human maintainers. While AI tools assist, critical security bugs in the kernel are typically found by experienced human reviewers who understand subtle memory management patterns.",
+      es: "Las revisiones de seguridad del kernel Linux son realizadas principalmente por mantenedores humanos. Las fallas criticas de seguridad son encontradas por revisores humanos experimentados.",
+      zh: "Linux内核安全审查主要由人类维护者完成。虽然AI工具有辅助作用，但关键安全漏洞通常由有经验的人类审查者发现。",
+      ru: "Обзоры безопасности ядра Linux выполняются людьми-мейнтейнерами. Критические уязвимости обычно находят опытные человеческие ревьюеры.",
+      pt: "As revisoes de seguranca do kernel Linux sao feitas principalmente por mantenedores humanos. Bugs criticos de seguranca sao tipicamente encontrados por revisores humanos experientes.",
+      ar: "مراجعات أمان نواة لينكس تتم بشكل أساسي من قبل مشرفين بشريين. يتم العثور على الأخطاء الأمنية الحرجة عادة بواسطة مراجعين بشريين ذوي خبرة."
+    }
+  },
+  {
+    q: {
+      en: "This news anchor delivered the evening news on a Chinese state TV channel for months before viewers were told.",
+      es: "Este presentador de noticias presento las noticias nocturnas en un canal estatal chino durante meses antes de que los televidentes fueran informados.",
+      zh: "这位新闻主播在中国国家电视台播报了数月晚间新闻后观众才被告知。",
+      ru: "Этот ведущий новостей вёл вечерние новости на китайском гостелеканале месяцами, прежде чем зрителям сообщили.",
+      pt: "Este apresentador de noticias apresentou o noticiario noturno em um canal estatal chines por meses antes de os telespectadores serem informados.",
+      ar: "قدم مذيع الأخبار هذا نشرة الأخبار المسائية على قناة تلفزيونية صينية حكومية لأشهر قبل إخبار المشاهدين."
+    },
+    a: "ai",
+    fact: {
+      en: "Xinhua News Agency launched the world's first AI news anchor in 2018. The digital presenter could read news 24/7 and was nearly indistinguishable from human anchors.",
+      es: "La agencia Xinhua lanzo el primer presentador de noticias de IA del mundo en 2018. El presentador digital podia leer noticias 24/7.",
+      zh: "新华社于2018年推出了世界上第一个AI新闻主播。这个数字主播可以24/7播报新闻，与真人主播几乎无法区分。",
+      ru: "Агентство Синьхуа запустило первого в мире ИИ-ведущего новостей в 2018. Цифровой ведущий мог читать новости 24/7.",
+      pt: "A agencia Xinhua lancou o primeiro apresentador de noticias IA do mundo em 2018. O apresentador digital podia ler noticias 24/7.",
+      ar: "أطلقت وكالة شينخوا أول مذيع أخبار بالذكاء الاصطناعي في العالم عام 2018. كان المقدم الرقمي يقرأ الأخبار على مدار الساعة."
+    }
+  },
+  {
+    q: {
+      en: "This scientific paper proposing the double helix structure of DNA became one of the most cited papers in history.",
+      es: "Este articulo cientifico que propone la estructura de doble helice del ADN se convirtio en uno de los mas citados de la historia.",
+      zh: "这篇提出DNA双螺旋结构的科学论文成为历史上被引用最多的论文之一。",
+      ru: "Эта научная статья о двойной спирали ДНК стала одной из самых цитируемых в истории.",
+      pt: "Este artigo cientifico propondo a estrutura de dupla helice do DNA se tornou um dos mais citados da historia.",
+      ar: "أصبحت هذه الورقة العلمية التي اقترحت بنية الحلزون المزدوج للحمض النووي واحدة من أكثر الأوراق استشهادا في التاريخ."
+    },
+    a: "human",
+    fact: {
+      en: "Watson and Crick's 1953 paper describing DNA's double helix was a purely human achievement, built on Rosalind Franklin's X-ray crystallography work. No AI existed at the time.",
+      es: "El articulo de Watson y Crick de 1953 sobre la doble helice del ADN fue un logro puramente humano, basado en el trabajo de Rosalind Franklin.",
+      zh: "Watson和Crick 1953年描述DNA双螺旋的论文是纯人类成就，建立在Rosalind Franklin的X射线晶体学工作之上。当时还没有AI。",
+      ru: "Статья Уотсона и Крика 1953 года о двойной спирали ДНК — чисто человеческое достижение на основе работ Розалинд Франклин.",
+      pt: "O artigo de Watson e Crick de 1953 sobre a dupla helice do DNA foi uma conquista puramente humana, baseada no trabalho de Rosalind Franklin.",
+      ar: "كانت ورقة واتسون وكريك عام 1953 حول الحلزون المزدوج للحمض النووي إنجازا بشريا بحتا، مبنيا على عمل روزاليند فرانكلين."
+    }
+  },
+  {
+    q: {
+      en: "This Go player defeated the world champion 4-1 in a five-game match watched by 200 million people.",
+      es: "Este jugador de Go derroto al campeon mundial 4-1 en una partida de cinco juegos vista por 200 millones de personas.",
+      zh: "这位围棋选手在2亿人观看的五局比赛中以4比1击败了世界冠军。",
+      ru: "Этот игрок в Го победил чемпиона мира 4-1 в матче из пяти партий, который смотрели 200 миллионов.",
+      pt: "Este jogador de Go derrotou o campeao mundial por 4-1 em uma partida de cinco jogos assistida por 200 milhoes de pessoas.",
+      ar: "هزم لاعب الغو هذا بطل العالم 4-1 في مباراة من خمس جولات شاهدها 200 مليون شخص."
+    },
+    a: "ai",
+    fact: {
+      en: "AlphaGo by DeepMind defeated world champion Lee Sedol in 2016. The match was a watershed moment for AI, as Go was considered too complex for machines to master.",
+      es: "AlphaGo de DeepMind derroto al campeon mundial Lee Sedol en 2016. El Go se consideraba demasiado complejo para las maquinas.",
+      zh: "DeepMind的AlphaGo在2016年击败了世界冠军李世石。围棋被认为对机器来说太复杂了，这场比赛是AI的分水岭时刻。",
+      ru: "AlphaGo от DeepMind победил чемпиона мира Ли Седоля в 2016. Го считалась слишком сложной для машин.",
+      pt: "O AlphaGo do DeepMind derrotou o campeao mundial Lee Sedol em 2016. O Go era considerado complexo demais para maquinas.",
+      ar: "هزم AlphaGo من DeepMind بطل العالم لي سيدول في 2016. كانت لعبة الغو تعتبر معقدة جدا على الآلات."
+    }
+  },
+  {
+    q: {
+      en: "This novel won a Japanese literary prize and was partially written without the judges knowing how.",
+      es: "Esta novela gano un premio literario japones y fue parcialmente escrita sin que los jueces supieran como.",
+      zh: "这部小说获得了日本文学奖，评委们并不知道它是如何部分创作的。",
+      ru: "Этот роман получил японскую литературную премию, а жюри не знало, как он частично был написан.",
+      pt: "Este romance ganhou um premio literario japones e foi parcialmente escrito sem que os juizes soubessem como.",
+      ar: "فازت هذه الرواية بجائزة أدبية يابانية وكُتبت جزئيا دون أن يعرف الحكام كيف."
+    },
+    a: "ai",
+    fact: {
+      en: "In 2024, Rie Kudan won Japan's Akutagawa Prize and revealed that about 5% of her novel was generated directly by ChatGPT. It sparked a major debate about AI in creative writing.",
+      es: "En 2024, Rie Kudan gano el Premio Akutagawa de Japon y revelo que alrededor del 5% de su novela fue generado por ChatGPT.",
+      zh: "2024年，九段理江获得日本芥川奖，并透露小说中约5%的内容由ChatGPT直接生成，引发了关于AI创作的重大辩论。",
+      ru: "В 2024 Риэ Кудан получила японскую премию Акутагавы и раскрыла, что около 5% романа было сгенерировано ChatGPT.",
+      pt: "Em 2024, Rie Kudan ganhou o Premio Akutagawa do Japao e revelou que cerca de 5% do romance foi gerado pelo ChatGPT.",
+      ar: "في 2024، فازت ريي كودان بجائزة أكوتاغاوا اليابانية وكشفت أن حوالي 5% من روايتها تم إنشاؤها بواسطة ChatGPT."
+    }
+  },
+  {
+    q: {
+      en: "This chess player was undefeated in over 100 games against grandmasters and played a completely new style of chess.",
+      es: "Este jugador de ajedrez fue invicto en mas de 100 partidas contra grandes maestros y jugo un estilo completamente nuevo.",
+      zh: "这位棋手在与特级大师的100多局比赛中保持不败，并下出了全新风格的棋。",
+      ru: "Этот шахматист не проиграл ни одной из 100+ партий с гроссмейстерами и играл совершенно новым стилем.",
+      pt: "Este jogador de xadrez ficou invicto em mais de 100 partidas contra grandes mestres e jogou um estilo completamente novo.",
+      ar: "لم يُهزم لاعب الشطرنج هذا في أكثر من 100 مباراة ضد أساتذة كبار ولعب بأسلوب جديد تماما."
+    },
+    a: "ai",
+    fact: {
+      en: "AlphaZero taught itself chess in just 4 hours and then crushed Stockfish 28-0 (with 72 draws). It invented completely new chess strategies never seen in 1500 years of human play.",
+      es: "AlphaZero aprendio ajedrez solo en 4 horas y luego aplasto a Stockfish 28-0. Invento estrategias nunca vistas en 1500 anos.",
+      zh: "AlphaZero仅用4小时自学国际象棋，然后以28-0（72和）击败Stockfish。它发明了1500年人类下棋中从未见过的全新策略。",
+      ru: "AlphaZero научился шахматам за 4 часа и разгромил Stockfish 28-0. Он изобрёл стратегии, невиданные за 1500 лет.",
+      pt: "O AlphaZero aprendeu xadrez sozinho em apenas 4 horas e entao derrotou o Stockfish 28-0. Inventou estrategias nunca vistas em 1500 anos.",
+      ar: "تعلم AlphaZero الشطرنج بنفسه في 4 ساعات فقط ثم سحق Stockfish 28-0. اخترع استراتيجيات لم تُشاهد في 1500 عام."
+    }
+  },
+  {
+    q: {
+      en: "This mathematical proof of Fermat's Last Theorem took 7 years to complete and spans 129 pages.",
+      es: "Esta demostracion matematica del Ultimo Teorema de Fermat tardo 7 anos y abarca 129 paginas.",
+      zh: "费马大定理的这个数学证明花了7年完成，长达129页。",
+      ru: "Это математическое доказательство последней теоремы Ферма заняло 7 лет и 129 страниц.",
+      pt: "Esta prova matematica do Ultimo Teorema de Fermat levou 7 anos e abrange 129 paginas.",
+      ar: "استغرقت هذه البرهان الرياضي لمبرهنة فيرما الأخيرة 7 سنوات وتمتد على 129 صفحة."
+    },
+    a: "human",
+    fact: {
+      en: "Andrew Wiles proved Fermat's Last Theorem in 1995 after working in secret for 7 years. This 358-year-old problem was solved purely through human mathematical genius.",
+      es: "Andrew Wiles demostro el Ultimo Teorema de Fermat en 1995 tras trabajar en secreto durante 7 anos. Un problema de 358 anos resuelto por genio humano.",
+      zh: "Andrew Wiles在秘密工作7年后于1995年证明了费马大定理。这个358年的问题完全通过人类数学天才解决。",
+      ru: "Эндрю Уайлс доказал теорему Ферма в 1995 после 7 лет тайной работы. 358-летняя задача решена чистым человеческим гением.",
+      pt: "Andrew Wiles provou o Ultimo Teorema de Fermat em 1995 apos trabalhar em segredo por 7 anos. Um problema de 358 anos resolvido por genio humano puro.",
+      ar: "أثبت أندرو وايلز مبرهنة فيرما الأخيرة عام 1995 بعد العمل سرا لمدة 7 سنوات. تم حل هذه المسألة البالغ عمرها 358 عاما بالعبقرية البشرية."
+    }
+  },
+  {
+    q: {
+      en: "This voice cloned a celebrity so convincingly that it was used in a $25 million fraud scheme targeting a company.",
+      es: "Esta voz clono a una celebridad tan convincentemente que se uso en un fraude de $25 millones contra una empresa.",
+      zh: "这个声音克隆了一位名人如此逼真，以至于被用于针对一家公司的2500万美元诈骗计划。",
+      ru: "Этот голос клонировал знаменитость настолько убедительно, что был использован в мошенничестве на $25 млн.",
+      pt: "Esta voz clonou uma celebridade tao convincentemente que foi usada em um esquema de fraude de $25 milhoes contra uma empresa.",
+      ar: "استنسخ هذا الصوت شخصية مشهورة بشكل مقنع لدرجة أنه استُخدم في مخطط احتيال بقيمة 25 مليون دولار يستهدف شركة."
+    },
+    a: "ai",
+    fact: {
+      en: "In 2024, scammers used AI voice cloning in a deepfake video call to impersonate a company's CFO, tricking an employee into transferring $25 million. AI voice cloning has become a major security concern.",
+      es: "En 2024, estafadores usaron clonacion de voz por IA en una videollamada deepfake para suplantar al director financiero de una empresa y robar $25 millones.",
+      zh: "2024年，骗子利用AI语音克隆进行深伪视频通话，冒充公司首席财务官，骗取了2500万美元。AI语音克隆已成为重大安全隐患。",
+      ru: "В 2024 мошенники использовали ИИ-клонирование голоса в дипфейк-звонке, выдав себя за финдиректора и украв $25 млн.",
+      pt: "Em 2024, golpistas usaram clonagem de voz por IA em videochamada deepfake para se passar pelo CFO de uma empresa e roubar $25 milhoes.",
+      ar: "في 2024، استخدم المحتالون استنساخ الصوت بالذكاء الاصطناعي في مكالمة فيديو مزيفة لانتحال شخصية المدير المالي لشركة وسرقة 25 مليون دولار."
+    }
+  },
+  {
+    q: {
+      en: "This photograph of an Afghan girl with striking green eyes became one of National Geographic's most famous covers.",
+      es: "Esta fotografia de una nina afgana con impresionantes ojos verdes se convirtio en una de las portadas mas famosas de National Geographic.",
+      zh: "这张拥有惊人绿色眼睛的阿富汗女孩照片成为《国家地理》最著名的封面之一。",
+      ru: "Эта фотография афганской девочки с поразительными зелёными глазами стала одной из самых знаменитых обложек National Geographic.",
+      pt: "Esta fotografia de uma menina afega com impressionantes olhos verdes se tornou uma das capas mais famosas da National Geographic.",
+      ar: "أصبحت هذه الصورة لفتاة أفغانية بعيون خضراء مذهلة واحدة من أشهر أغلفة ناشيونال جيوغرافيك."
+    },
+    a: "human",
+    fact: {
+      en: "Steve McCurry photographed 'Afghan Girl' Sharbat Gula in 1984 at a refugee camp. The iconic image was captured on Kodachrome film — decades before AI image generation existed.",
+      es: "Steve McCurry fotografio a 'la nina afgana' Sharbat Gula en 1984. La imagen fue capturada en pelicula Kodachrome, decadas antes de la IA generativa.",
+      zh: "Steve McCurry于1984年在难民营拍摄了'阿富汗女孩' Sharbat Gula。这张标志性照片用柯达胶片拍摄——比AI图像生成早了几十年。",
+      ru: "Стив Маккарри сфотографировал 'Афганскую девочку' Шарбат Гулу в 1984 году на плёнку Kodachrome — за десятилетия до ИИ-генерации.",
+      pt: "Steve McCurry fotografou a 'Menina Afega' Sharbat Gula em 1984 em filme Kodachrome — decadas antes da IA generativa.",
+      ar: "صوّر ستيف ماكوري 'الفتاة الأفغانية' شربات غولا عام 1984 بفيلم كوداكروم — قبل عقود من ظهور الذكاء الاصطناعي التوليدي."
+    }
+  },
+  {
+    q: {
+      en: "This image won first place at the Colorado State Fair's digital art competition, sparking outrage among artists.",
+      es: "Esta imagen gano el primer lugar en la competencia de arte digital de la Feria Estatal de Colorado, generando indignacion entre los artistas.",
+      zh: "这幅图像在科罗拉多州博览会数字艺术比赛中获得一等奖，在艺术家中引发了愤怒。",
+      ru: "Это изображение заняло первое место на конкурсе цифрового искусства ярмарки Колорадо, вызвав возмущение художников.",
+      pt: "Esta imagem ganhou o primeiro lugar na competicao de arte digital da Feira Estadual do Colorado, gerando revolta entre artistas.",
+      ar: "فازت هذه الصورة بالمركز الأول في مسابقة الفن الرقمي في معرض ولاية كولورادو، مما أثار غضب الفنانين."
+    },
+    a: "ai",
+    fact: {
+      en: "Jason Allen's 'Theatre D'opera Spatial' was created using Midjourney AI and won 1st place in 2022. When revealed, it ignited the ongoing debate about AI art in competitions.",
+      es: "La obra 'Theatre D'opera Spatial' de Jason Allen fue creada con Midjourney y gano el 1er lugar en 2022, encendiendo el debate sobre IA en competiciones artisticas.",
+      zh: "Jason Allen的'Theatre D'opera Spatial'使用Midjourney AI创作，2022年获得一等奖。揭露后引发了关于AI艺术参赛的持续辩论。",
+      ru: "Работа Джейсона Аллена 'Theatre D'opera Spatial' создана с Midjourney и победила в 2022. Это разожгло дебаты об ИИ-искусстве в конкурсах.",
+      pt: "A obra 'Theatre D'opera Spatial' de Jason Allen foi criada com Midjourney e ganhou o 1o lugar em 2022, acendendo o debate sobre IA em competicoes.",
+      ar: "أُنشئت لوحة 'Theatre D'opera Spatial' لجايسون ألين باستخدام Midjourney وفازت بالمركز الأول في 2022، مما أشعل النقاش حول فن الذكاء الاصطناعي."
+    }
+  },
+  {
+    q: {
+      en: "This medical diagnosis system correctly identified rare cancers that three specialist doctors had missed.",
+      es: "Este sistema de diagnostico medico identifico correctamente canceres raros que tres medicos especialistas habian pasado por alto.",
+      zh: "这个医疗诊断系统正确识别出三位专科医生遗漏的罕见癌症。",
+      ru: "Эта система медицинской диагностики правильно определила редкие раки, которые пропустили три врача-специалиста.",
+      pt: "Este sistema de diagnostico medico identificou corretamente canceres raros que tres medicos especialistas haviam perdido.",
+      ar: "حدد نظام التشخيص الطبي هذا بشكل صحيح سرطانات نادرة فاتت ثلاثة أطباء متخصصين."
+    },
+    a: "ai",
+    fact: {
+      en: "AI diagnostic systems like Google's LYNA and PathAI have demonstrated superhuman accuracy in detecting certain cancers from pathology slides, outperforming experienced oncologists in multiple clinical trials.",
+      es: "Sistemas de diagnostico de IA como LYNA de Google han demostrado precision sobrehumana en la deteccion de ciertos canceres, superando a oncologos experimentados.",
+      zh: "谷歌的LYNA和PathAI等AI诊断系统在从病理切片检测特定癌症方面表现出超人的准确性，在多项临床试验中优于经验丰富的肿瘤学家。",
+      ru: "Системы диагностики ИИ, такие как LYNA от Google, продемонстрировали сверхчеловеческую точность в обнаружении рака, превосходя опытных онкологов.",
+      pt: "Sistemas de diagnostico de IA como LYNA do Google demonstraram precisao sobre-humana na deteccao de certos canceres, superando oncologistas experientes.",
+      ar: "أظهرت أنظمة التشخيص بالذكاء الاصطناعي مثل LYNA من جوجل دقة فائقة في اكتشاف بعض السرطانات، متفوقة على أطباء الأورام ذوي الخبرة."
+    }
+  },
+  {
+    q: {
+      en: "This Beatles song was completed and released in 2023, decades after John Lennon recorded a rough demo.",
+      es: "Esta cancion de los Beatles fue completada y lanzada en 2023, decadas despues de que John Lennon grabara un demo.",
+      zh: "这首披头士歌曲在John Lennon录制粗略小样几十年后，于2023年完成并发行。",
+      ru: "Эта песня Beatles была завершена и выпущена в 2023, через десятилетия после чернового демо Джона Леннона.",
+      pt: "Esta cancao dos Beatles foi completada e lancada em 2023, decadas apos John Lennon gravar um demo.",
+      ar: "اكتملت أغنية البيتلز هذه وصدرت في 2023، بعد عقود من تسجيل جون لينون لعرض تجريبي."
+    },
+    a: "ai",
+    fact: {
+      en: "'Now and Then' used AI (MAL audio separation technology) to isolate Lennon's voice from a lo-fi 1978 cassette demo, allowing Paul McCartney and Ringo Starr to complete the final Beatles song.",
+      es: "'Now and Then' uso IA para aislar la voz de Lennon de un demo en casete de 1978, permitiendo completar la ultima cancion de los Beatles.",
+      zh: "'Now and Then'使用AI(MAL音频分离技术)从1978年的低保真磁带小样中分离出Lennon的声音，使McCartney和Starr完成了最后一首披头士歌曲。",
+      ru: "'Now and Then' использовала ИИ для изоляции голоса Леннона с кассетного демо 1978 года, что позволило завершить последнюю песню Beatles.",
+      pt: "'Now and Then' usou IA para isolar a voz de Lennon de um demo em fita de 1978, permitindo que McCartney e Starr completassem a ultima cancao dos Beatles.",
+      ar: "استخدمت أغنية 'Now and Then' الذكاء الاصطناعي لعزل صوت لينون من شريط تجريبي عام 1978، مما سمح لماكارتني وستار بإكمال آخر أغنية للبيتلز."
+    }
+  },
+  {
+    q: {
+      en: "This experiment confirmed the existence of gravitational waves, exactly as predicted 100 years earlier.",
+      es: "Este experimento confirmo la existencia de ondas gravitacionales, exactamente como se predijo 100 anos antes.",
+      zh: "这个实验证实了引力波的存在，正如100年前预测的那样。",
+      ru: "Этот эксперимент подтвердил существование гравитационных волн, как и предсказывалось 100 лет назад.",
+      pt: "Este experimento confirmou a existencia de ondas gravitacionais, exatamente como previsto 100 anos antes.",
+      ar: "أكدت هذه التجربة وجود موجات الجاذبية، كما تم التنبؤ بها قبل 100 عام بالضبط."
+    },
+    a: "human",
+    fact: {
+      en: "LIGO detected gravitational waves in 2015, confirming Einstein's 1915 prediction. The detection required thousands of human scientists, engineers, and decades of work — a triumph of human collaboration.",
+      es: "LIGO detecto ondas gravitacionales en 2015, confirmando la prediccion de Einstein de 1915. Requirio miles de cientificos humanos y decadas de trabajo.",
+      zh: "LIGO在2015年探测到引力波，证实了爱因斯坦1915年的预测。这需要数千名人类科学家和数十年的工作——人类合作的胜利。",
+      ru: "LIGO обнаружила гравитационные волны в 2015, подтвердив предсказание Эйнштейна 1915 года. Это потребовало тысяч учёных и десятилетий работы.",
+      pt: "O LIGO detectou ondas gravitacionais em 2015, confirmando a predicao de Einstein de 1915. Exigiu milhares de cientistas e decadas de trabalho.",
+      ar: "اكتشف LIGO موجات الجاذبية في 2015، مؤكدا تنبؤ أينشتاين عام 1915. تطلب الاكتشاف آلاف العلماء وعقودا من العمل."
+    }
+  }
+];
+
+let currentQ = 0;
+let score = 0;
+let shuffled = [];
+let answered = false;
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function init() {
+  shuffled = shuffle(questions);
+  currentQ = 0;
+  score = 0;
+  answered = false;
+  document.getElementById('aq-score').textContent = '0';
+  document.getElementById('aq-final').classList.add('aq-hidden');
+  document.getElementById('aq-question-card').classList.remove('aq-hidden');
+  renderQuestion();
+}
+
+function renderQuestion() {
+  answered = false;
+  const q = shuffled[currentQ];
+  document.getElementById('aq-question').textContent = q.q[lang] || q.q.en;
+  document.getElementById('aq-of-total').textContent = t.of + ' ' + shuffled.length;
+  document.getElementById('aq-feedback').classList.add('aq-hidden');
+  document.getElementById('aq-funfact').classList.add('aq-hidden');
+  document.getElementById('aq-next').classList.add('aq-hidden');
+
+  const progress = ((currentQ) / shuffled.length) * 100;
+  document.getElementById('aq-progress').style.width = progress + '%';
+
+  const optBox = document.getElementById('aq-options');
+  optBox.innerHTML =
+    '<button class="aq-opt" data-answer="ai"><span class="aq-opt-icon">🤖</span> ' + t.ai + '</button>' +
+    '<button class="aq-opt" data-answer="human"><span class="aq-opt-icon">🧑</span> ' + t.human + '</button>';
+
+  optBox.querySelectorAll('.aq-opt').forEach(function(btn) {
+    btn.addEventListener('click', function() { checkAnswer(this.dataset.answer); });
+  });
+}
+
+function checkAnswer(selected) {
+  if (answered) return;
+  answered = true;
+  const q = shuffled[currentQ];
+  const correct = q.a;
+  const fb = document.getElementById('aq-feedback');
+  const ff = document.getElementById('aq-funfact');
+  fb.classList.remove('aq-hidden');
+  ff.classList.remove('aq-hidden');
+  ff.textContent = q.fact[lang] || q.fact.en;
+
+  const opts = document.querySelectorAll('.aq-opt');
+  opts.forEach(function(btn) {
+    if (btn.dataset.answer === correct) {
+      btn.classList.add('aq-opt-correct');
+    } else if (btn.dataset.answer === selected && selected !== correct) {
+      btn.classList.add('aq-opt-wrong');
+    }
+    btn.disabled = true;
+  });
+
+  if (selected === correct) {
+    score++;
+    document.getElementById('aq-score').textContent = score;
+    fb.textContent = t.correct;
+    fb.className = 'aq-feedback aq-fb-correct';
+  } else {
+    fb.textContent = t.wrong;
+    fb.className = 'aq-feedback aq-fb-wrong';
+  }
+
+  document.getElementById('aq-next').classList.remove('aq-hidden');
+}
+
+document.getElementById('aq-next').addEventListener('click', function() {
+  currentQ++;
+  if (currentQ >= shuffled.length) {
+    showFinal();
+  } else {
+    renderQuestion();
+  }
+});
+
+function showFinal() {
+  document.getElementById('aq-question-card').classList.add('aq-hidden');
+  var fin = document.getElementById('aq-final');
+  fin.classList.remove('aq-hidden');
+  document.getElementById('aq-final-score').textContent = score + ' ' + t.of + ' ' + shuffled.length;
+  document.getElementById('aq-progress').style.width = '100%';
+
+  var pct = score / shuffled.length;
+  var msg = t.tryHarder;
+  if (pct >= 0.8) msg = t.great;
+  else if (pct >= 0.5) msg = t.good;
+  document.getElementById('aq-final-msg').textContent = msg;
+}
+
+init();
+</script>
+
+<style>
+  .aq-section {
+    padding: 50px 0;
+    background: linear-gradient(180deg, rgba(59,130,246,.03), rgba(139,92,246,.03));
+    border-top: 1px solid rgba(255,255,255,.06);
+    border-bottom: 1px solid rgba(255,255,255,.06);
+    font-family: 'Inter', -apple-system, sans-serif;
+  }
+  .aq-container { max-width: 640px; margin: 0 auto; padding: 0 20px; text-align: center; }
+  .aq-title {
+    font-size: 1.8rem; font-weight: 800; margin-bottom: 8px;
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6, #06b6d4);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+  .aq-subtitle { color: rgba(255,255,255,.5); margin-bottom: 24px; font-size: .95rem; }
+  .aq-score-bar {
+    display: flex; align-items: center; gap: 16px; margin-bottom: 24px;
+  }
+  .aq-score-label { color: rgba(255,255,255,.6); font-size: .9rem; white-space: nowrap; }
+  .aq-score-label strong { color: #3b82f6; font-size: 1.1rem; }
+  .aq-progress-wrap {
+    flex: 1; height: 6px; background: rgba(255,255,255,.08); border-radius: 3px; overflow: hidden;
+  }
+  .aq-progress-bar {
+    height: 100%; width: 0; background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+    border-radius: 3px; transition: width .4s ease;
+  }
+  .aq-question-card {
+    padding: 32px 24px; background: rgba(255,255,255,.04);
+    border: 1px solid rgba(255,255,255,.08); border-radius: 16px;
+  }
+  .aq-question-text {
+    font-size: 1.1rem; color: rgba(255,255,255,.9); line-height: 1.6;
+    margin-bottom: 24px; min-height: 60px;
+  }
+  .aq-options {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px;
+  }
+  .aq-opt {
+    padding: 16px 12px; border-radius: 12px;
+    border: 1px solid rgba(255,255,255,.12); background: rgba(255,255,255,.04);
+    color: rgba(255,255,255,.85); font-size: 1.05rem; font-weight: 600;
+    cursor: pointer; transition: all .2s; text-align: center;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+  }
+  .aq-opt-icon { font-size: 1.3rem; }
+  .aq-opt:hover:not(:disabled) {
+    border-color: rgba(59,130,246,.5); background: rgba(59,130,246,.1);
+    transform: translateY(-2px);
+  }
+  .aq-opt:disabled { cursor: default; opacity: .7; }
+  .aq-opt-correct {
+    border-color: rgba(34,197,94,.6) !important;
+    background: rgba(34,197,94,.15) !important;
+    color: #4ade80 !important;
+    opacity: 1 !important;
+  }
+  .aq-opt-wrong {
+    border-color: rgba(239,68,68,.6) !important;
+    background: rgba(239,68,68,.15) !important;
+    color: #f87171 !important;
+    opacity: 1 !important;
+  }
+  .aq-hidden { display: none !important; }
+  .aq-feedback {
+    padding: 12px 20px; border-radius: 10px; font-weight: 700;
+    font-size: .95rem; margin-bottom: 8px;
+  }
+  .aq-fb-correct { background: rgba(34,197,94,.12); color: #4ade80; border: 1px solid rgba(34,197,94,.3); }
+  .aq-fb-wrong { background: rgba(239,68,68,.12); color: #f87171; border: 1px solid rgba(239,68,68,.3); }
+  .aq-funfact {
+    padding: 12px 16px; border-radius: 10px; font-size: .85rem;
+    color: rgba(255,255,255,.6); background: rgba(139,92,246,.08);
+    border: 1px solid rgba(139,92,246,.15); margin-bottom: 12px;
+    line-height: 1.5; text-align: left;
+  }
+  .aq-btn-next {
+    padding: 12px 28px; border-radius: 10px; border: 1px solid rgba(255,255,255,.15);
+    background: transparent; color: rgba(255,255,255,.7); cursor: pointer;
+    font-weight: 600; font-size: .95rem; transition: all .2s;
+  }
+  .aq-btn-next:hover { border-color: rgba(59,130,246,.5); color: #fff; }
+  .aq-final { margin-top: 24px; }
+  .aq-final-score {
+    font-size: 3rem; font-weight: 800;
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    margin-bottom: 12px;
+  }
+  .aq-final-msg { color: rgba(255,255,255,.6); font-size: 1.1rem; margin-bottom: 24px; }
+  .aq-btn-play {
+    padding: 14px 32px; border-radius: 12px; border: none;
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6); color: #fff;
+    font-weight: 700; font-size: 1rem; cursor: pointer; transition: all .2s;
+  }
+  .aq-btn-play:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(59,130,246,.3); }
+  @media (max-width: 480px) {
+    .aq-options { grid-template-columns: 1fr; }
+    .aq-question-text { font-size: 1rem; }
+  }
+</style>
